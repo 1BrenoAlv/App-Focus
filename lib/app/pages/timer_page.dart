@@ -16,6 +16,13 @@ class TimerPage extends StatelessWidget {
         backgroundColor: AppConfig.backgroundColor,
         elevation: 0,
         toolbarHeight: 56,
+        leading: IconButton(
+          // voltar a página anterior
+          onPressed: () {
+            Navigator.pop(context, '10 min');
+          },
+          icon: const Icon(Icons.arrow_back, color: Colors.white, size: 28),
+        ),
       ),
       body: SafeArea(
         child: Padding(
