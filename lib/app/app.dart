@@ -12,9 +12,21 @@ class App extends StatelessWidget {
     return MaterialApp(
       routes: {
         '/': (_) => HomePage(),
-        '/timer': (_) => TimerPage(timerType: TimerType.focus),
-        '/short-break': (_) => TimerPage(timerType: TimerType.shortBreak),
-        '/long-break': (_) => TimerPage(timerType: TimerType.longBreak),
+        '/timer': (_) => TimerPage(
+          timerType:
+              ModalRoute.of(context)?.settings.arguments as TimerType? ??
+              TimerType.focus,
+        ),
+        '/short-break': (_) => TimerPage(
+          timerType:
+              ModalRoute.of(context)?.settings.arguments as TimerType? ??
+              TimerType.shortBreak,
+        ),
+        '/long-break': (_) => TimerPage(
+          timerType:
+              ModalRoute.of(context)?.settings.arguments as TimerType? ??
+              TimerType.longBreak,
+        ),
       },
       debugShowCheckedModeBanner: false,
       title: 'Fokus',
