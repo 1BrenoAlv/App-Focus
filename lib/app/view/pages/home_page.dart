@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fokus/app/enums/timer_type.dart';
-import '../utils/app_config.dart';
+import 'package:fokus/app/shared/enums/timer_type.dart';
+import '../../shared/utils/app_config.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -31,13 +31,13 @@ class HomePage extends StatelessWidget {
                           '/timer',
                           arguments: TimerType.focus,
                         );
-                        if (result != null) {
-                          showDialog(
-                            context: context,
-                            builder: (_) =>
-                                AlertDialog(title: Text(result.toString())),
-                          );
-                        }
+                        // if (result != null) {
+                        //   showDialog(
+                        //     context: context,
+                        //     builder: (_) =>
+                        //         AlertDialog(title: Text(result.toString())),
+                        //   );
+                        // }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppConfig.buttonColor,
