@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fokus/app/shared/enums/timer_type.dart';
+import 'package:fokus/app/shared/utils/routes.dart';
 import 'package:fokus/app/view-model/time_viewModel.dart';
-import 'package:fokus/app/view/pages/home_page.dart';
-import 'package:fokus/app/view/pages/timer_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -14,24 +12,7 @@ class App extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => TimerViewmodel(),
       child: MaterialApp(
-        routes: {
-          '/': (_) => HomePage(),
-          '/timer': (_) => TimerPage(
-            timerType:
-                ModalRoute.of(context)?.settings.arguments as TimerType? ??
-                TimerType.focus,
-          ),
-          '/short-break': (_) => TimerPage(
-            timerType:
-                ModalRoute.of(context)?.settings.arguments as TimerType? ??
-                TimerType.shortBreak,
-          ),
-          '/long-break': (_) => TimerPage(
-            timerType:
-                ModalRoute.of(context)?.settings.arguments as TimerType? ??
-                TimerType.longBreak,
-          ),
-        },
+        routes: routes,
         debugShowCheckedModeBanner: false,
         title: 'Fokus',
         theme: ThemeData(

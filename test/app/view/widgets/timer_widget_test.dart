@@ -59,7 +59,29 @@ void main() {
         expect(pauseButton, findsOneWidget);
 
         await tester.tap(pauseButton);
+        await tester.pumpAndSettle(Duration(seconds: 2));
+
+        expect(find.text("00:01"), findsOneWidget);
+      });
+    });
+
+    testWidgets('Chama o stoptime ao clicar em Parar', (tester) async {
+      await tester.pumpWidget(createWidget());
+      final startButton = find.text('Iniciar');
+      await tester.tap(startButton);
+      await tester.pumpAndSettle();
+
+      tester.runAsync(() async {
+        final pauseButton = find.text('Pausar');
+        expect(pauseButton, findsOneWidget);
+
+        await tester.tap(pauseButton);
         await tester.pumpAndSettle();
+
+        await tester.tap(find.text('Parar'));
+        await tester.pumpAndSettle();
+
+        verify(() => mockTimerViewModel.stopTime()).called(1);
       });
     });
   });
