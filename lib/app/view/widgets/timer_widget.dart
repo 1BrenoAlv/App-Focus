@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:fokus/app/shared/utils/app_config.dart';
 import 'package:fokus/app/view-model/time_viewModel.dart';
+import 'package:provider/provider.dart';
 
 class TimerWidget extends StatefulWidget {
   final int initialMinutes;
@@ -13,11 +14,12 @@ class TimerWidget extends StatefulWidget {
 }
 
 class _TimerWidgetState extends State<TimerWidget> {
-  final timerViewModel = TimerViewmodel();
+  late TimerViewmodel timerViewModel;
   final isPauseNotifier = ValueNotifier<bool>(false);
 
   @override
   void initState() {
+    timerViewModel = Provider.of<TimerViewmodel>(context, listen: false);
     super.initState();
   }
 
