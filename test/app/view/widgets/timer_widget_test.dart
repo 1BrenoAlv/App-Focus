@@ -5,13 +5,13 @@ import 'package:fokus/app/view/widgets/timer_widget.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 
-class MockTimerViewModel extends Mock implements TimerViewmodel {}
+class MockTimerViewModel extends Mock implements TimerViewModel {}
 
 void main() {
   late MockTimerViewModel mockTimerViewModel;
 
   Widget createWidget() {
-    return ChangeNotifierProvider<TimerViewmodel>.value(
+    return ChangeNotifierProvider<TimerViewModel>.value(
       value: mockTimerViewModel,
       child: MaterialApp(home: Scaffold(body: TimerWidget(initialMinutes: 1))),
     );
@@ -46,7 +46,7 @@ void main() {
 
       await tester.tap(startButton);
       await tester.pumpAndSettle();
-      verify(() => mockTimerViewModel.startTime(any(), any())).called(1);
+      verify(() => mockTimerViewModel.startTimer(any(), any())).called(1);
     });
     testWidgets('pausa a contagem ao clicar em pausar', (tester) async {
       await tester.pumpWidget(createWidget());

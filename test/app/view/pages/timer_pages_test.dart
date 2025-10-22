@@ -6,13 +6,13 @@ import 'package:fokus/app/view/pages/timer_page.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 
-class MockTimerViewModel extends Mock implements TimerViewmodel {}
+class MockTimerViewModel extends Mock implements TimerViewModel {}
 
 void main() {
   late MockTimerViewModel mockTimerViewModel;
 
   Widget createWidget({TimerType timerType = TimerType.focus}) {
-    return ChangeNotifierProvider<TimerViewmodel>.value(
+    return ChangeNotifierProvider<TimerViewModel>.value(
       value: mockTimerViewModel,
       child: MaterialApp(
         home: Scaffold(body: TimerPage(timerType: timerType)),
@@ -48,7 +48,7 @@ void main() {
         await tester.tap(find.text('Iniciar'));
         await tester.pumpAndSettle();
 
-        verify(() => mockTimerViewModel.startTime(25, any())).called(1);
+        verify(() => mockTimerViewModel.startTimer(25, any())).called(1);
       });
       testWidgets('mostra "Pausar" após iniciar a contagem', (tester) async {
         await tester.pumpWidget(createWidget(timerType: TimerType.focus));
@@ -106,7 +106,7 @@ void main() {
         await tester.tap(find.text('Iniciar'));
         await tester.pumpAndSettle();
 
-        verify(() => mockTimerViewModel.startTime(15, any())).called(1);
+        verify(() => mockTimerViewModel.startTimer(15, any())).called(1);
       });
       testWidgets('mostra "Pausar" após iniciar a contagem', (tester) async {
         await tester.pumpWidget(createWidget(timerType: TimerType.longBreak));
@@ -166,7 +166,7 @@ void main() {
         await tester.tap(find.text('Iniciar'));
         await tester.pumpAndSettle();
 
-        verify(() => mockTimerViewModel.startTime(5, any())).called(1);
+        verify(() => mockTimerViewModel.startTimer(5, any())).called(1);
       });
       testWidgets('mostra "Pausar" após iniciar a contagem', (tester) async {
         await tester.pumpWidget(createWidget(timerType: TimerType.shortBreak));

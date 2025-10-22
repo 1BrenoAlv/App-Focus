@@ -7,13 +7,13 @@ import 'package:fokus/app/view/widgets/timer_widget.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 
-class MockTimerViewModel extends Mock implements TimerViewmodel {}
+class MockTimerViewModel extends Mock implements TimerViewModel {}
 
 void main() {
   late MockTimerViewModel mockTimerViewModel;
 
   Widget createWidget() {
-    return ChangeNotifierProvider<TimerViewmodel>.value(
+    return ChangeNotifierProvider<TimerViewModel>.value(
       value: mockTimerViewModel,
       child: MaterialApp(
         routes: routes,

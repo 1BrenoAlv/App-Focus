@@ -10,7 +10,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => TimerViewmodel(),
+      create: (_) => TimerViewModel(),
       child: MaterialApp(
         routes: routes,
         debugShowCheckedModeBanner: false,

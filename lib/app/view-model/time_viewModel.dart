@@ -1,32 +1,48 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 
-class TimerViewmodel extends ChangeNotifier {
+class TimerViewModel extends ChangeNotifier {
   bool isPlaying = false;
   Timer? timer;
   Duration duration = Duration.zero;
+  bool _isDispose = false;
 
-  void startTime(int initialMinutes, ValueNotifier<bool> isPaused) {
+  void startTimer(int initialMinutes, ValueNotifier<bool> isPaused) {
     duration = Duration.zero;
     isPlaying = true;
     notifyListeners();
 
     timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      if(isPaused.value) return;
+      if (_isDispose) {
+        timer.cancel();
+        return;
+      }
+
+      if (isPaused.value) return;
 
       if (duration.inMinutes < initialMinutes) {
         duration += Duration(seconds: 1);
-        notifyListeners();
+        if (hasListeners) {
+          notifyListeners();
+        }
       } else {
-        isPlaying = false;
-        timer.cancel();
+        stopTime();
       }
     });
   }
 
   void stopTime() {
     isPlaying = false;
-    notifyListeners();
     timer?.cancel();
+    if (hasListeners) {
+      notifyListeners();
+    }
+  }
+
+  @override
+  void dispose() {
+    _isDispose = true;
+    timer?.cancel();
+    super.dispose();
   }
 }

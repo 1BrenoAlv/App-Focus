@@ -14,12 +14,12 @@ class TimerWidget extends StatefulWidget {
 }
 
 class _TimerWidgetState extends State<TimerWidget> {
-  late TimerViewmodel timerViewModel;
+  late TimerViewModel timerViewModel;
   final isPauseNotifier = ValueNotifier<bool>(false);
 
   @override
   void initState() {
-    timerViewModel = Provider.of<TimerViewmodel>(context, listen: false);
+    timerViewModel = Provider.of<TimerViewModel>(context, listen: false);
     super.initState();
   }
 
@@ -77,7 +77,7 @@ class _TimerWidgetState extends State<TimerWidget> {
                     if (isPlaying) {
                       timerViewModel.stopTime();
                     } else {
-                      timerViewModel.startTime(
+                      timerViewModel.startTimer(
                         widget.initialMinutes,
                         isPauseNotifier,
                       );
